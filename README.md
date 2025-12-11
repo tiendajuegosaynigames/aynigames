@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
@@ -9,11 +8,6 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-        }
-
-        /* Ocultar el encabezado azul de GitHub Pages */
-        body > *:not(header):not(section):not(footer):not(script):first-child {
-            display: none !important;
         }
 
         body {
@@ -51,7 +45,9 @@
             width: 60px;
             height: 60px;
             object-fit: contain;
+            background: #f5f5f5;
             border-radius: 8px;
+            padding: 5px;
         }
 
         .logo-text {
@@ -278,6 +274,7 @@
             padding: 3rem;
         }
 
+        /* Modal del carrito */
         .modal {
             display: none;
             position: fixed;
@@ -502,7 +499,8 @@
     <header>
         <nav>
             <div class="logo-container">
-                <img src="https://i.postimg.cc/661QNyqp/IMG-20251209-001629.png" alt="Ayni Games Logo" class="logo-img">
+                <!-- AQUÍ PUEDES PONER TU LOGO: Reemplaza el src="" con la URL de tu logo -->
+    <img src="https://i.postimg.cc/661QNyqp/IMG-20251209-001629.png" alt="Ayni Games Logo" class="logo-img">
                 <div class="logo-text">
                     <div class="logo-title">AYNI GAMES</div>
                     <div class="logo-subtitle">Juegos de Mesa</div>
@@ -531,6 +529,7 @@
 
     <section class="products" id="productsContainer"></section>
 
+    <!-- Modal del Carrito -->
     <div id="cartModal" class="modal">
         <div class="modal-content">
             <div class="modal-header">
@@ -548,7 +547,8 @@
     </footer>
 
     <script>
-        const WHATSAPP_NUMBER = "59178933669";
+        // CONFIGURACIÓN - CAMBIA ESTE NÚMERO CON TU WHATSAPP
+        const WHATSAPP_NUMBER = "59178933669"; // Pon tu número aquí (formato: código país + número sin +)
 
         const products = [
             {name: "7 Wonders Cartas", price: 335, category: "cartas"},
@@ -648,7 +648,4 @@
         }
 
         function getCategoryName(category) {
-            const names = {
-                'cartas': '🎴 Cartas',
-                'tablero': '🎲 Tablero',
-                'es
+   
