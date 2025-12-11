@@ -1,3 +1,7 @@
+body::before {
+    content: '';
+    display: none;
+}
 <html lang="es">
 <head>
     <meta charset="UTF-8">
