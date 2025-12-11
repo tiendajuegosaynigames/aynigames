@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
@@ -8,6 +9,11 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+        }
+
+        /* Ocultar el encabezado azul de GitHub Pages */
+        body > *:not(header):not(section):not(footer):not(script):first-child {
+            display: none !important;
         }
 
         body {
@@ -45,9 +51,7 @@
             width: 60px;
             height: 60px;
             object-fit: contain;
-            background: #f5f5f5;
             border-radius: 8px;
-            padding: 5px;
         }
 
         .logo-text {
@@ -274,7 +278,6 @@
             padding: 3rem;
         }
 
-        /* Modal del carrito */
         .modal {
             display: none;
             position: fixed;
@@ -499,8 +502,7 @@
     <header>
         <nav>
             <div class="logo-container">
-                <!-- AQUÍ PUEDES PONER TU LOGO: Reemplaza el src="" con la URL de tu logo -->
-    <img src="https://i.postimg.cc/661QNyqp/IMG-20251209-001629.png" alt="Ayni Games Logo" class="logo-img">
+                <img src="https://i.postimg.cc/661QNyqp/IMG-20251209-001629.png" alt="Ayni Games Logo" class="logo-img">
                 <div class="logo-text">
                     <div class="logo-title">AYNI GAMES</div>
                     <div class="logo-subtitle">Juegos de Mesa</div>
@@ -529,7 +531,6 @@
 
     <section class="products" id="productsContainer"></section>
 
-    <!-- Modal del Carrito -->
     <div id="cartModal" class="modal">
         <div class="modal-content">
             <div class="modal-header">
@@ -547,8 +548,7 @@
     </footer>
 
     <script>
-        // CONFIGURACIÓN - CAMBIA ESTE NÚMERO CON TU WHATSAPP
-        const WHATSAPP_NUMBER = "59178933669"; // Pon tu número aquí (formato: código país + número sin +)
+        const WHATSAPP_NUMBER = "59178933669";
 
         const products = [
             {name: "7 Wonders Cartas", price: 335, category: "cartas"},
@@ -651,145 +651,4 @@
             const names = {
                 'cartas': '🎴 Cartas',
                 'tablero': '🎲 Tablero',
-                'estrategia': '🧠 Estrategia'
-            };
-            return names[category] || '🎮 Juego';
-        }
-
-        function filterProducts(category) {
-            currentFilter = category;
-            
-            document.querySelectorAll('.filter-btn').forEach(btn => {
-                btn.classList.remove('active');
-            });
-            event.target.classList.add('active');
-            
-            const filtered = category === 'todos' 
-                ? products 
-                : products.filter(p => p.category === category);
-            
-            renderProducts(filtered);
-        }
-
-        function searchProducts() {
-            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
-            const filtered = products.filter(p => 
-                p.name.toLowerCase().includes(searchTerm)
-            );
-            renderProducts(filtered);
-        }
-
-        function addToCart(productName, price) {
-            cart.push({name: productName, price: price, id: Date.now()});
-            updateCartCount();
-            
-            const cartBtn = document.querySelector('.cart-btn');
-            cartBtn.style.animation = 'none';
-            setTimeout(() => {
-                cartBtn.style.animation = 'bounce 0.5s';
-            }, 10);
-        }
-
-        function updateCartCount() {
-            document.getElementById('cartCount').textContent = cart.length;
-        }
-
-        function removeFromCart(itemId) {
-            cart = cart.filter(item => item.id !== itemId);
-            updateCartCount();
-            renderCart();
-        }
-
-        function clearCart() {
-            if (confirm('¿Estás seguro de vaciar el carrito?')) {
-                cart = [];
-                updateCartCount();
-                renderCart();
-            }
-        }
-
-        function openCart() {
-            document.getElementById('cartModal').style.display = 'block';
-            renderCart();
-        }
-
-        function closeCart() {
-            document.getElementById('cartModal').style.display = 'none';
-        }
-
-        function renderCart() {
-            const cartItemsDiv = document.getElementById('cartItems');
-            const cartActionsDiv = document.getElementById('cartActions');
-
-            if (cart.length === 0) {
-                cartItemsDiv.innerHTML = `
-                    <div class="empty-cart">
-                        <div class="empty-cart-icon">🛒</div>
-                        <p>Tu carrito está vacío</p>
-                    </div>
-                `;
-                cartActionsDiv.innerHTML = '';
-                return;
-            }
-
-            const total = cart.reduce((sum, item) => sum + item.price, 0);
-
-            cartItemsDiv.innerHTML = cart.map(item => `
-                <div class="cart-item">
-                    <div class="cart-item-info">
-                        <div class="cart-item-name">${item.name}</div>
-                        <div class="cart-item-price">Bs ${item.price}</div>
-                    </div>
-                    <button class="remove-btn" onclick="removeFromCart(${item.id})">Eliminar</button>
-                </div>
-            `).join('');
-
-            cartActionsDiv.innerHTML = `
-                <div class="cart-total">
-                    <div class="cart-total-label">Total:</div>
-                    <div class="cart-total-price">Bs ${total}</div>
-                </div>
-                <div class="cart-actions">
-                    <button class="whatsapp-btn" onclick="sendToWhatsApp()">
-                        <span style="font-size: 1.5rem;">📱</span>
-                        Enviar Pedido por WhatsApp
-                    </button>
-                    <button class="clear-cart-btn" onclick="clearCart()">Vaciar</button>
-                </div>
-            `;
-        }
-
-        function sendToWhatsApp() {
-            if (cart.length === 0) {
-                alert('El carrito está vacío');
-                return;
-            }
-
-            const total = cart.reduce((sum, item) => sum + item.price, 0);
-            
-            let message = '🎲 *PEDIDO AYNI GAMES*\n\n';
-            message += '📋 *Productos:*\n';
-            
-            cart.forEach((item, index) => {
-                message += `${index + 1}. ${item.name} - Bs ${item.price}\n`;
-            });
-            
-            message += `\n💰 *TOTAL: Bs ${total}*\n\n`;
-            message += '¡Pedido finalizado! 🙌';
-
-            const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
-            window.open(whatsappUrl, '_blank');
-        }
-
-        // Cerrar modal al hacer clic fuera
-        window.onclick = function(event) {
-            const modal = document.getElementById('cartModal');
-            if (event.target == modal) {
-                closeCart();
-            }
-        }
-
-        renderProducts();
-    </script>
-</body>
-</html>
+                'es
