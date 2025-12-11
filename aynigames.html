@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GameBoard - Tienda de Juegos de Mesa</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 1.5rem 2rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        nav {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #667eea;
+        }
+
+        .search-bar {
+            flex: 1;
+            max-width: 400px;
+            position: relative;
+        }
+
+        .search-bar input {
+            width: 100%;
+            padding: 0.7rem 1rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 25px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        .search-bar input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .cart-btn {
+            background: #667eea;
+            color: white;
+            padding: 0.6rem 1.5rem;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: transform 0.3s, background 0.3s;
+        }
+
+        .cart-btn:hover {
+            background: #5568d3;
+            transform: scale(1.05);
+        }
+
+        .hero {
+            max-width: 1400px;
+            margin: 3rem auto;
+            padding: 3rem 2rem;
+            text-align: center;
+            color: white;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+        }
+
+        .filter-section {
+            max-width: 1400px;
+            margin: 0 auto 2rem;
+            padding: 0 2rem;
+        }
+
+        .filter-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .filter-btn {
+            background: white;
+            border: 2px solid white;
+            padding: 0.6rem 1.5rem;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .filter-btn:hover, .filter-btn.active {
+            background: #667eea;
+            color: white;
+            border-color: white;
+        }
+
+        .products {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.25);
+        }
+
+        .product-img {
+            width: 100%;
+            height: 250px;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            color: white;
+            font-weight: 600;
+            text-align: center;
+            padding: 1rem;
+            position: relative;
+        }
+
+        .product-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: none;
+        }
+
+        .product-img.has-image img {
+            display: block;
+        }
+
+        .product-img.has-image::before {
+            display: none;
+        }
+
+        .product-info {
+            padding: 1.5rem;
+        }
+
+        .product-title {
+            font-size: 1.2rem;
+            color: #333;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+
+        .product-category {
+            display: inline-block;
+            background: #f0f0f0;
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            color: #666;
+            margin-bottom: 1rem;
+        }
+
+        .product-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 1rem;
+        }
+
+        .price {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #667eea;
+        }
+
+        .buy-btn {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 0.7rem 1.5rem;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background 0.3s, transform 0.2s;
+        }
+
+        .buy-btn:hover {
+            background: #5568d3;
+            transform: scale(1.05);
+        }
+
+        .no-results {
+            text-align: center;
+            color: white;
+            font-size: 1.3rem;
+            padding: 3rem;
+        }
+
+        footer {
+            background: rgba(0,0,0,0.3);
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .search-bar {
+                max-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">🎲 GameBoard</div>
+            <div class="search-bar">
+                <input type="text" id="searchInput" placeholder="Buscar juegos..." onkeyup="searchProducts()">
+            </div>
+            <button class="cart-btn" onclick="showCart()">🛒 Carrito (<span id="cartCount">0</span>)</button>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <h1>Descubre la Magia de los Juegos de Mesa</h1>
+        <p>Los mejores juegos para compartir momentos inolvidables con familia y amigos</p>
+    </section>
+
+    <section class="filter-section">
+        <div class="filter-buttons">
+            <button class="filter-btn active" onclick="filterProducts('todos')">Todos</button>
+            <button class="filter-btn" onclick="filterProducts('cartas')">Juegos de Cartas</button>
+            <button class="filter-btn" onclick="filterProducts('tablero')">Juegos de Tablero</button>
+            <button class="filter-btn" onclick="filterProducts('estrategia')">Estrategia</button>
+        </div>
+    </section>
+
+    <section class="products" id="productsContainer"></section>
+
+    <footer>
+        <p>&copy; 2024 GameBoard - Tienda de Juegos de Mesa | Todos los derechos reservados</p>
+        <p>📧 contacto@gameboard.com | 📞 +591 123-4567</p>
+    </footer>
+
+    <script>
+        // Base de datos de productos
+        const products = [
+            {name: "7 Wonders Cartas", price: 335, category: "cartas"},
+            {name: "7 Wonders Duel", price: 330, category: "estrategia"},
+            {name: "7 Wonders Tablero", price: 690, category: "tablero"},
+            {name: "Avalon", price: 230, category: "cartas"},
+            {name: "Azul", price: 380, category: "tablero"},
+            {name: "Azul Summer Pavillion", price: 410, category: "tablero"},
+            {name: "Bears vs Babies", price: 240, category: "cartas"},
+            {name: "Bears vs Babies EXP", price: 95, category: "cartas"},
+            {name: "Beat That", price: 340, category: "tablero"},
+            {name: "Breaking Kittens", price: 190, category: "cartas"},
+            {name: "Carcassone", price: 360, category: "tablero"},
+            {name: "Catan", price: 325, category: "estrategia"},
+            {name: "Catan Extension", price: 290, category: "estrategia"},
+            {name: "Catan Navegantes", price: 380, category: "estrategia"},
+            {name: "Catan Navegantes Ext", price: 290, category: "estrategia"},
+            {name: "Cities of Splendor", price: 360, category: "estrategia"},
+            {name: "Clank", price: 500, category: "tablero"},
+            {name: "Código Secreto", price: 280, category: "cartas"},
+            {name: "Coup", price: 160, category: "cartas"},
+            {name: "Dixit", price: 340, category: "cartas"},
+            {name: "Dixit Quest EXP", price: 210, category: "cartas"},
+            {name: "Dixit Stella", price: 360, category: "cartas"},
+            {name: "EK Party", price: 190, category: "cartas"},
+            {name: "Exploding Kittens", price: 175, category: "cartas"},
+            {name: "Exploding Minions", price: 150, category: "cartas"},
+            {name: "Fantasma Blitz", price: 150, category: "cartas"},
+            {name: "Gatitos NSFW", price: 160, category: "cartas"},
+            {name: "Happy Little Dinosaurs", price: 320, category: "cartas"},
+            {name: "Happy Little Dinosaurs Expansion", price: 280, category: "cartas"},
+            {name: "Hombre Lobo", price: 160, category: "cartas"},
+            {name: "Imploding Streaking", price: 190, category: "cartas"},
+            {name: "Jaipur", price: 230, category: "cartas"},
+            {name: "Monopolio Games of Thrones", price: 390, category: "tablero"},
+            {name: "Pandemic", price: 320, category: "estrategia"},
+            {name: "Patchwork", price: 240, category: "tablero"},
+            {name: "Phase 10", price: 50, category: "cartas"},
+            {name: "Play Nine", price: 230, category: "cartas"},
+            {name: "Race to the Treasure", price: 210, category: "tablero"},
+            {name: "Root", price: 575, category: "estrategia"},
+            {name: "Root Ribereños", price: 430, category: "estrategia"},
+            {name: "Saboteur", price: 170, category: "cartas"},
+            {name: "Secret Hitler", price: 350, category: "cartas"},
+            {name: "Sequence", price: 260, category: "tablero"},
+            {name: "Sequence for Kids", price: 230, category: "tablero"},
+            {name: "Splendor", price: 350, category: "estrategia"},
+            {name: "Splendor Marvel", price: 390, category: "estrategia"},
+            {name: "Sushi GO Party", price: 320, category: "cartas"},
+            {name: "Terraforming Mars", price: 690, category: "estrategia"},
+            {name: "The Mind", price: 150, category: "cartas"},
+            {name: "Ticket to Ride Europa", price: 360, category: "tablero"},
+            {name: "Ticket to Ride for Journey", price: 320, category: "tablero"},
+            {name: "Ticket to Ride USA", price: 360, category: "tablero"},
+            {name: "Throw Throw Burrito", price: 380, category: "cartas"},
+            {name: "Wingspan", price: 690, category: "estrategia"},
+            {name: "Zombie Kittens", price: 170, category: "cartas"}
+        ];
+
+        let cart = [];
+        let currentFilter = 'todos';
+
+        // Colores aleatorios para las tarjetas
+        const gradients = [
+            'linear-gradient(135deg, #FA8BFF 0%, #2BD2FF 90%)',
+            'linear-gradient(135deg, #FDEB71 0%, #F8D800 100%)',
+            'linear-gradient(135deg, #FEB692 0%, #EA5455 100%)',
+            'linear-gradient(135deg, #A8EDEA 0%, #FED6E3 100%)',
+            'linear-gradient(135deg, #FF9A9E 0%, #FAD0C4 99%)',
+            'linear-gradient(135deg, #C471F5 0%, #FA71CD 100%)',
+            'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+            'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)'
+        ];
+
+        function renderProducts(filteredProducts = products) {
+            const container = document.getElementById('productsContainer');
+            
+            if (filteredProducts.length === 0) {
+                container.innerHTML = '<div class="no-results">No se encontraron juegos 😢</div>';
+                return;
+            }
+
+            container.innerHTML = filteredProducts.map((product, index) => `
+                <div class="product-card">
+                    <div class="product-img" style="background: ${gradients[index % gradients.length]}">
+                        <img src="" alt="${product.name}" data-product="${product.name}">
+                        ${product.name}
+                        <div style="position: absolute; bottom: 10px; right: 10px; background: rgba(0,0,0,0.5); padding: 5px 10px; border-radius: 10px; font-size: 0.8rem;">
+                            📷 Agregar imagen
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">${product.name}</h3>
+                        <span class="product-category">${getCategoryName(product.category)}</span>
+                        <div class="product-footer">
+                            <span class="price">Bs ${product.price}</span>
+                            <button class="buy-btn" onclick="addToCart('${product.name}', ${product.price})">Comprar</button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function getCategoryName(category) {
+            const names = {
+                'cartas': '🎴 Cartas',
+                'tablero': '🎲 Tablero',
+                'estrategia': '🧠 Estrategia'
+            };
+            return names[category] || '🎮 Juego';
+        }
+
+        function filterProducts(category) {
+            currentFilter = category;
+            
+            // Actualizar botones activos
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            // Filtrar productos
+            const filtered = category === 'todos' 
+                ? products 
+                : products.filter(p => p.category === category);
+            
+            renderProducts(filtered);
+        }
+
+        function searchProducts() {
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+            const filtered = products.filter(p => 
+                p.name.toLowerCase().includes(searchTerm)
+            );
+            renderProducts(filtered);
+        }
+
+        function addToCart(productName, price) {
+            cart.push({name: productName, price: price});
+            updateCartCount();
+            
+            const cartBtn = document.querySelector('.cart-btn');
+            cartBtn.style.animation = 'none';
+            setTimeout(() => {
+                cartBtn.style.animation = 'bounce 0.5s';
+            }, 10);
+            
+            alert(`✅ ${productName} agregado al carrito!\nPrecio: Bs ${price}`);
+        }
+
+        function updateCartCount() {
+            document.getElementById('cartCount').textContent = cart.length;
+        }
+
+        function showCart() {
+            if (cart.length === 0) {
+                alert('Tu carrito está vacío 🛒');
+                return;
+            }
+            
+            const total = cart.reduce((sum, item) => sum + item.price, 0);
+            const items = cart.map(item => `• ${item.name}: Bs ${item.price}`).join('\n');
+            alert(`🛒 Tu Carrito:\n\n${items}\n\n💰 TOTAL: Bs ${total}`);
+        }
+
+        // Cargar productos al iniciar
+        renderProducts();
+    </script>
+</body>
+</html>
