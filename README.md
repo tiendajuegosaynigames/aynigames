@@ -537,7 +537,7 @@
         const WHATSAPP_NUMBER = "59178933669";
 
         const products = [
-            {name: "7 Wonders Cartas", price: 335, category: "cartas", image: ["https://imgur.com/a/3nQD2w6](https://postimg.cc/gallery/TLYXKpt)" },
+            {name: "7 Wonders Cartas", price: 335, category: "cartas", image:"https://i.postimg.cc/J4Snrn0w/7-wonders.png" },
             {name: "7 Wonders Duel", price: 330, category: "estrategia"},
             {name: "7 Wonders Tablero", price: 690, category: "tablero"},
             {name: "Avalon", price: 230, category: "cartas"},
