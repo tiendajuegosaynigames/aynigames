@@ -1,11 +1,30 @@
-        body {
+        <!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ayni Games - Tienda de Juegos de Mesa</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Ocultar el encabezado azul de GitHub Pages */
+        body > *:not(header):not(section):not(footer):not(script):first-child {
+            display: none !important;
+        }
+
+
+body {
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         background: linear-gradient(135deg, #6b2c3e 0%, #4a1f2c 100%);
         min-height: 100vh;
     }
 
     header {
-        background: rgba(255, 255, 255, 0.98);
+        background: rgba(255, 255, 255, 0.98``);
         padding: 1rem 2rem;
         box-shadow: 0 4px 6px rgba(0,0,0,0.1);
         position: sticky;
