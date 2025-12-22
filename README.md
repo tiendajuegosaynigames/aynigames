@@ -1,11 +1,19 @@
+<!DOCTYPE html>
 <html lang="es">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ayni Games - Tienda de Juegos de Mesa</title>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+        }
+
+        /* Ocultar el encabezado azul de GitHub Pages */
+        body > *:not(header):not(section):not(footer):not(script):first-child {
+            display: none !important;
         }
 
         body {
@@ -43,9 +51,7 @@
             width: 60px;
             height: 60px;
             object-fit: contain;
-            background: #f5f5f5;
             border-radius: 8px;
-            padding: 5px;
         }
 
         .logo-text {
@@ -272,7 +278,6 @@
             padding: 3rem;
         }
 
-        /* Modal del carrito */
         .modal {
             display: none;
             position: fixed;
@@ -497,8 +502,7 @@
     <header>
         <nav>
             <div class="logo-container">
-                <!-- AQUÍ PUEDES PONER TU LOGO: Reemplaza el src="" con la URL de tu logo -->
-    <img src="https://i.postimg.cc/661QNyqp/IMG-20251209-001629.png" alt="Ayni Games Logo" class="logo-img">
+                <img src="https://i.postimg.cc/661QNyqp/IMG-20251209-001629.png" alt="Ayni Games Logo" class="logo-img">
                 <div class="logo-text">
                     <div class="logo-title">AYNI GAMES</div>
                     <div class="logo-subtitle">Juegos de Mesa</div>
@@ -527,7 +531,6 @@
 
     <section class="products" id="productsContainer"></section>
 
-    <!-- Modal del Carrito -->
     <div id="cartModal" class="modal">
         <div class="modal-content">
             <div class="modal-header">
@@ -545,8 +548,7 @@
     </footer>
 
     <script>
-        // CONFIGURACIÓN - CAMBIA ESTE NÚMERO CON TU WHATSAPP
-        const WHATSAPP_NUMBER = "59178933669"; // Pon tu número aquí (formato: código país + número sin +)
+        const WHATSAPP_NUMBER = "59178933669";
 
         const products = [
             {name: "7 Wonders Cartas", price: 335, category: "cartas"},
@@ -603,7 +605,22 @@
             {name: "Ticket to Ride USA", price: 360, category: "tablero"},
             {name: "Throw Throw Burrito", price: 380, category: "cartas"},
             {name: "Wingspan", price: 690, category: "estrategia"},
-            {name: "Zombie Kittens", price: 170, category: "cartas"}
+            {name: "Zombie Kittens", price: 170, category: "cartas"},
+            {name: "Spot It Marvel", price: 99, category: "cartas"},
+            {name: "Spot It Harry Potter", price: 99, category: "cartas"},
+            {name: "Spot It Disney 100 Años", price: 99, category: "cartas"},
+            {name: "Spot It 1,2,3", price: 99, category: "cartas"},
+            {name: "Spot It Princesas", price: 99, category: "cartas"},
+            {name: "Spot It Cars", price: 99, category: "cartas"},
+            {name: "Spot It Bob Esponja", price: 99, category: "cartas"},
+            {name: "Spot It DC", price: 99, category: "cartas"},
+            {name: "Spot It Holidays", price: 99, category: "cartas"},
+            {name: "Spot It Halloween", price: 99, category: "cartas"},
+            {name: "Spot It Pokémon", price: 99, category: "cartas"},
+            {name: "Spot It Minions", price: 99, category: "cartas"},
+            {name: "Spot It Alfabético", price: 99, category: "cartas"},
+            {name: "Spot It Star Wars", price: 99, category: "cartas"},
+            {name: "Spot It Pixar", price: 99, category: "cartas"}
         ];
 
         let cart = [];
@@ -628,10 +645,11 @@
 
             container.innerHTML = filteredProducts.map((product, index) => `
                 <div class="product-card">
-                    <div class="product-img" style="background: ${gradients[index % gradients.length]}">
-                        <img src="" alt="${product.name}" data-product="${product.name}">
-                        ${product.name}
-                        <div class="upload-hint">📷 Imagen próximamente</div>
+                    <div class="product-img ${product.image ? 'has-image' : ''}" style="background: ${gradients[index % gradients.length]}">
+                        ${product.image ? 
+                            `<img src="${product.image}" alt="${product.name}" style="display: block;">` : 
+                            `${product.name}<div class="upload-hint">📷 Imagen próximamente</div>`
+                        }
                     </div>
                     <div class="product-info">
                         <h3 class="product-title">${product.name}</h3>
@@ -650,7 +668,6 @@
                 'cartas': '🎴 Cartas',
                 'tablero': '🎲 Tablero',
                 'estrategia': '🧠 Estrategia'
-                
             };
             return names[category] || '🎮 Juego';
         }
@@ -774,13 +791,12 @@
             });
             
             message += `\n💰 *TOTAL: Bs ${total}*\n\n`;
-            message += '¡Pedido finalizado! 🙌';
+            message += '¡Gracias por tu pedido! 🙌';
 
             const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
             window.open(whatsappUrl, '_blank');
         }
 
-        // Cerrar modal al hacer clic fuera
         window.onclick = function(event) {
             const modal = document.getElementById('cartModal');
             if (event.target == modal) {
