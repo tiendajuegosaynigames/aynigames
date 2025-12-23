@@ -546,7 +546,7 @@
             {name: "Bears vs Babies", price: 240, category: "cartas", image:" https://i.postimg.cc/VsDRnTn9/image.png " },
             {name: "Bears vs Babies EXP", price: 95, category: "cartas", image: "https://i.postimg.cc/VkL2XT7j/image.png" },
             {name: "Beat That", price: 340, category: "tablero", image:" https://i.postimg.cc/0jtW25pd/image.png" },
-            {name: "Breaking Kittens", price: 190, category: "cartas", image:" " },
+            {name: "Barking Kittens", price: 190, category: "cartas", image:" https://i.postimg.cc/pLLB8KB5/image.png" },
             {name: "Carcassone", price: 360, category: "tablero", image:" " },
             {name: "Catan", price: 325, category: "estrategia", image:" " },
             {name: "Catan Extension", price: 290, category: "estrategia", image:" " },
