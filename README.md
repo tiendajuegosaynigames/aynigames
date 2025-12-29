@@ -1,4 +1,4 @@
-
+<img width="501" height="460" alt="image" src="https://github.com/user-attachments/assets/6ef69876-941f-4316-82e2-38dcb7ccb60e" />
 <html lang="es">
 <head>
     <meta charset="UTF-8">
@@ -566,8 +566,7 @@
             {name: "Fantasma Blitz", price: 150, category: "cartas", image:" https://i.postimg.cc/ZnLqb753/image.png" },
             {name: "Happy Little Dinosaurs", price: 320, category: "cartas", image:"https://i.postimg.cc/9FRL46h0/image.png " },
             {name: "Happy Little Dinosaurs Expansion", price: 280, category: "cartas", image:"https://i.postimg.cc/R0sPJ4N7/image.png " },
-            {name: "Happy Salmon", price: 65, category: "cartas", image:"https://i.postimg.cc/63LCGN6s/image.png" },
-            {name: "Hombre Lobo", price: 160, category: "cartas", image:" " },
+            {name: "Hombre Lobo", price: 160, category: "cartas", image:"https://i.postimg.cc/05w1F7Pq/image.png " },
             {name: "Imploding Streaking", price: 190, category: "cartas", image:" " },
             {name: "Jaipur", price: 230, category: "cartas", image:" " },
             {name: "Monopolio Games of Thrones", price: 390, category: "tablero", image:" " },
