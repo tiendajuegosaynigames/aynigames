@@ -570,7 +570,7 @@
             {name: "Hombre Lobo", price: 160, category: "cartas", image:"https://i.postimg.cc/05w1F7Pq/image.png " },
             {name: "Imploding Streaking", price: 190, category: "cartas", image:" https://i.postimg.cc/RVCy9YHv/image.png" },
             {name: "Jaipur", price: 230, category: "cartas", image:" https://i.postimg.cc/Dfx5QwSz/image.png" },
-            {name: "Monopolio Games of Thrones", price: 390, category: "tablero", image:"https://i.postimg.cc/7Lp1t5gm/image.png " },
+            {name: "Monopolio Games of Thrones", price: 360, category: "tablero", image:"https://i.postimg.cc/7Lp1t5gm/image.png " },
             {name: "Pandemic", price: 320, category: "estrategia", image:"https://i.postimg.cc/8CPP84bV/image.png " },
             {name: "Patchwork", price: 240, category: "tablero", image:"https://i.postimg.cc/mrtfN5wS/image.png " },
             {name: "Phase 10", price: 50, category: "cartas", image:" https://i.postimg.cc/SQ5rJtXw/image.png" },
